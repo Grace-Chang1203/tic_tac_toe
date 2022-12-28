@@ -1,7 +1,9 @@
 package com.example.tic_tac_toe;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,8 +21,12 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     private int player1Points;
     private int player2Points;
 
+    private String player1 = "玩家1:";
+    private String player2 = "玩家2:";
+
     private TextView textViewPlayer1;
     private TextView textViewPlayer2;
+    private Button btn_end;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -40,13 +46,21 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
             }
         }
 
-        Button buttonReset = findViewById(R.id.button_reset);
-        buttonReset.setOnClickListener(new View.OnClickListener() {
+        btn_end = findViewById(R.id.btn_end);
+        btn_end.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetGame();
+                Intent i = new Intent();
+                Bundle b = new Bundle();
+                b.putString("玩家1",player1);
+                b.putString("玩家2",player2);
+                i.putExtras(b);
+                setResult(101,i);
+                finish();
+                endGame();
             }
         });
+
     }
 
     @Override
@@ -119,26 +133,29 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
     private void player1Wins() {
         player1Points++;
-        Toast.makeText(this, "Player 1 wins!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "玩家1 獲勝!", Toast.LENGTH_SHORT).show();
         updatePointsText();
         resetBoard();
     }
 
     private void player2Wins() {
         player2Points++;
-        Toast.makeText(this, "Player 2 wins!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "玩家2 獲勝!", Toast.LENGTH_SHORT).show();
         updatePointsText();
         resetBoard();
     }
 
     private void draw() {
-        Toast.makeText(this, "Draw!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "平手!", Toast.LENGTH_SHORT).show();
         resetBoard();
     }
 
     private void updatePointsText() {
-        textViewPlayer1.setText("Player 1: " + player1Points);
-        textViewPlayer2.setText("Player 2: " + player2Points);
+        textViewPlayer1.setText("玩家1: " + player1Points);
+        textViewPlayer2.setText("玩家2: " + player2Points);
+
+        player1 = "玩家1 得分: " + player1Points;
+        player2 = "玩家2 得分: " + player2Points;
     }
 
     private void resetBoard() {
@@ -152,12 +169,12 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         player1Turn = true;
     }
 
-    private void resetGame() {
+    private void endGame() {
         player1Points = 0;
         player2Points = 0;
         updatePointsText();
         resetBoard();
-        Toast.makeText(this, "Reset the game!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "遊戲結束!", Toast.LENGTH_SHORT).show();
     }
 
     @Override
