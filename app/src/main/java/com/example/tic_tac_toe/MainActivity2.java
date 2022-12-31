@@ -24,6 +24,9 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     private String player1 = "玩家1:";
     private String player2 = "玩家2:";
 
+    private int p1;
+    private int p2;
+
     private TextView textViewPlayer1;
     private TextView textViewPlayer2;
     private Button btn_end;
@@ -36,6 +39,15 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
         textViewPlayer1 = findViewById(R.id.text_view_p1);
         textViewPlayer2 = findViewById(R.id.text_view_p2);
+
+        Bundle bundle = this.getIntent().getExtras();
+        p1 = bundle.getInt("p1");
+        p2 = bundle.getInt("p2");
+
+        if (p1 == 1)
+            player1Turn = true;
+        else
+            player1Turn = false;
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
