@@ -45,12 +45,12 @@
         app:layout_constraintStart_toStartOf="@+id/btn_start"
         app:layout_constraintBottom_toTopOf="@+id/btn_start" >
 
-        <TextView
-            android:id="@+id/tv_p1"
+        <EditText
+            android:id="@+id/ed_p1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30sp"
-            android:text="玩家1"/>
+            android:hint="1"/>
 
         <RadioButton
             android:id="@+id/radioButton1"
@@ -76,12 +76,12 @@
         app:layout_constraintRight_toRightOf="@+id/btn_start"
         app:layout_constraintBottom_toTopOf="@+id/btn_start" >
 
-        <TextView
-            android:id="@+id/tv_p2"
+        <EditText
+            android:id="@+id/ed_p2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30sp"
-            android:text="玩家2" />
+            android:hint="2" />
 
         <RadioButton
             android:id="@+id/radioButton3"

@@ -27,6 +27,9 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     private int p1;
     private int p2;
 
+    private String p1_name;
+    private String p2_name;
+
     private TextView textViewPlayer1;
     private TextView textViewPlayer2;
     private Button btn_end;
@@ -43,6 +46,10 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         Bundle bundle = this.getIntent().getExtras();
         p1 = bundle.getInt("p1");
         p2 = bundle.getInt("p2");
+        p1_name = bundle.getString("p1_name");
+        p2_name = bundle.getString("p2_name");
+
+        updatePointsText();
 
         if (p1 == 1)
             player1Turn = true;
@@ -145,14 +152,14 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
     private void player1Wins() {
         player1Points++;
-        Toast.makeText(this, "玩家1 獲勝!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, p1_name + "獲勝!", Toast.LENGTH_SHORT).show();
         updatePointsText();
         resetBoard();
     }
 
     private void player2Wins() {
         player2Points++;
-        Toast.makeText(this, "玩家2 獲勝!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, p2_name + "獲勝!", Toast.LENGTH_SHORT).show();
         updatePointsText();
         resetBoard();
     }
@@ -163,8 +170,8 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     }
 
     private void updatePointsText() {
-        textViewPlayer1.setText("玩家1: " + player1Points);
-        textViewPlayer2.setText("玩家2: " + player2Points);
+        textViewPlayer1.setText(p1_name + ":" + player1Points);
+        textViewPlayer2.setText(p2_name + ":" + player2Points);
 
         player1 = "玩家1 得分: " + player1Points;
         player2 = "玩家2 得分: " + player2Points;
