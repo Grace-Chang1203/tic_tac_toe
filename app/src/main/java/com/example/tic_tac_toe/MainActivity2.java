@@ -27,6 +27,11 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
     private int language = 0;
 
+    private int p1;
+
+    private String p1_name;
+    private String p2_name;
+
     private TextView textViewPlayer1;
     private TextView textViewPlayer2;
     private Button btn_end;
@@ -42,9 +47,13 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         btn_end = findViewById(R.id.btn_end);
 
         Intent intent = getIntent();
+        Bundle bundle = this.getIntent().getExtras();
+        p1 = bundle.getInt("p1");
         language = intent.getIntExtra("language",0);
-        updatePointsText();
+        p1_name = bundle.getString("p1_name");
+        p2_name = bundle.getString("p2_name");
 
+        updatePointsText();
 
         if(language == 0) {
             btn_end.setText("結束遊戲");
@@ -52,6 +61,11 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
         else if(language  == 1) {
             btn_end.setText("Finish");
         }
+
+        if (p1 == 1)
+            player1Turn = true;
+        else
+            player1Turn = false;
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
@@ -150,10 +164,9 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     private void player1Wins() {
         player1Points++;
         if (language == 0)
-            Toast.makeText(this, "玩家1 獲勝!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, p1_name + " 獲勝!", Toast.LENGTH_SHORT).show();
         else if (language == 1)
-            Toast.makeText(this, "Player1 Wins!", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(this, p1_name + " Wins!", Toast.LENGTH_SHORT).show();
         updatePointsText();
         resetBoard();
     }
@@ -161,9 +174,9 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     private void player2Wins() {
         player2Points++;
         if (language == 0)
-            Toast.makeText(this, "玩家2 獲勝!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, p2_name + " 獲勝!", Toast.LENGTH_SHORT).show();
         else if (language == 1)
-            Toast.makeText(this, "Player2 Wins!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, p2_name + " Wins!", Toast.LENGTH_SHORT).show();
         updatePointsText();
         resetBoard();
     }
@@ -177,14 +190,8 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
     }
 
     private void updatePointsText() {
-        if (language == 0) {
-            textViewPlayer1.setText("玩家1: " + player1Points);
-            textViewPlayer2.setText("玩家2: " + player2Points);
-        }
-        else if(language == 1){
-            textViewPlayer1.setText("Player1: " + player1Points);
-            textViewPlayer2.setText("Player2: " + player2Points);
-        }
+        textViewPlayer1.setText(p1_name + " : " + player1Points);
+        textViewPlayer2.setText(p2_name + " : " + player2Points);
         player1 = player1Points;
         player2 = player2Points;
     }
