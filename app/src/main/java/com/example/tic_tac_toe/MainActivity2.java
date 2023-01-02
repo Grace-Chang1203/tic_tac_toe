@@ -109,9 +109,19 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
 
         if (checkForWin()) {
             if (player1Turn) {
-                player1Wins();
+                if (p1 == 1){
+                    player1Wins();
+                }
+                else{
+                    player2Wins();
+                }
             } else {
-                player2Wins();
+                if (p1 == 0){
+                    player1Wins();
+                }
+                else{
+                    player2Wins();
+                }
             }
         } else if (roundCount == 9) {
             draw();
@@ -203,7 +213,10 @@ public class MainActivity2 extends AppCompatActivity implements View.OnClickList
             }
         }
         roundCount = 0;
-        player1Turn = true;
+        if (p1 == 1)
+            player1Turn = true;
+        else
+            player1Turn = false;
     }
 
     private void endGame() {

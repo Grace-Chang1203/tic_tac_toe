@@ -25,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private RadioButton rb1,rb2,rb3,rb4;
 
     private int p1 = 1; // 1 is X,0 is O
-    private int p2 = 0;
     private String p1_name;
     private String p2_name;
 
@@ -70,11 +69,11 @@ public class MainActivity extends AppCompatActivity {
                 switch (i){
                     case R.id.radioButton3:
                         rb2.setChecked(true);
-                        p1 = 1;
+                        p1 = 0;
                         break;
                     case R.id.radioButton4:
                         rb1.setChecked(true);
-                        p1 = 0;
+                        p1 = 1;
                         break;
 
                 }
